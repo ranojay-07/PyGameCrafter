@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PyGameCrafter</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- CodeMirror CSS -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css"
+    />
+
+    <!-- App Styles -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="page-background"></div>
+
+    <div class="app-shell">
+        <header class="header">
+            <div class="logo-title">
+                <div class="logo-pill">
+                    <span class="logo-dot"></span>
+                </div>
+                <div class="title-block">
+                    <h1>PyGameCrafter</h1>
+                    <p class="subtitle">Craft, refine, and build Python Pygame games.</p>
+                </div>
+            </div>
+
+            <button id="toggle-theme" class="icon-button" aria-label="Toggle theme">
+                🌙
+            </button>
+        </header>
+
+        <!-- Status / notification bar -->
+        <div id="status-bar" class="status-bar status-bar--hidden" aria-live="polite"></div>
+
+        <main class="editor-section">
+            <!-- Left: Code + Prompt -->
+            <section class="editor-container">
+                <div class="panel-header">
+                    <div>
+                        <h2>Code Editor</h2>
+                        <p class="panel-subtitle">Paste your Python + Pygame game code here</p>
+                    </div>
+                    <button class="run-button pill-button" onclick="runOriginalCode()">
+                        ▶ Run Code
+                    </button>
+                </div>
+
+                <textarea id="code-editor"></textarea>
+
+                <div id="selection-info"></div>
+
+                <section class="prompt-section">
+                    <div class="panel-header panel-header--compact">
+                        <div>
+                            <h3>Prompt</h3>
+                            <p class="panel-subtitle">
+                                Tell PyGameCrafter how to tweak or generate your game
+                            </p>
+                        </div>
+                    </div>
+
+                    <textarea
+                        id="prompt-input"
+                        placeholder="e.g. Generate a Pygame game where a square dodges falling blocks..."
+                    ></textarea>
+
+                    <div class="button-row">
+                        <button onclick="clearForm()" class="secondary-button pill-button">
+                            Clear All
+                        </button>
+                        <button onclick="submitCode()" class="primary-button pill-button">
+                            Run Prompt (Ctrl + Enter)
+                        </button>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Right: Modified Code + Explanation -->
+            <section class="editor-container">
+                <div class="panel-header">
+                    <div>
+                        <h2>Modified / Generated Code</h2>
+                        <p class="panel-subtitle">
+                            PyGameCrafter’s crafted version of your game code
+                        </p>
+                    </div>
+                    <button class="run-button pill-button" onclick="runModifiedCode()">
+                        ▶ Run Modified
+                    </button>
+                </div>
+
+                <div id="modified-code-editor"></div>
+
+                <div class="button-row button-row--wrap">
+                    <button onclick="saveCode()" class="accent-button pill-button">
+                        Save Code
+                    </button>
+                    <button onclick="integrateCode()" class="success-button pill-button">
+                        Send to Editor
+                    </button>
+                    <button onclick="copyToClipboard()" class="purple-button pill-button">
+                        Copy to Clipboard
+                    </button>
+                </div>
+
+                <div class="explanation-wrapper">
+                    <div class="panel-header panel-header--compact">
+                        <h3 id="explanation_text">What PyGameCrafter did</h3>
+                    </div>
+                    <div id="explanation"></div>
+                </div>
+
+                <div id="loading" class="loading-indicator">
+                    <span class="spinner"></span>
+                    <span>Shaping your Python Pygame magic...</span>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <span>PyGameCrafter focuses on Python games built with Pygame 🎮</span>
+            <span class="footer-dot">•</span>
+            <span>Give us a prompt or your code, we’ll help with the rest</span>
+        </footer>
+    </div>
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
+
+    <!-- App Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
